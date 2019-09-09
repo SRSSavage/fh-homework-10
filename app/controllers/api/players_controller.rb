@@ -4,27 +4,33 @@ module API
 
     # GET /api/players
     def index
-      @player = Player.all 
+      @player = Player.all
+      render json: @player
     end
 
     # GET /api/players/1
     def show
-      # implement your code here
+      render json: @player
     end
 
     # POST /api/players
     def create
-      # implement your code here
+      @player = Player.create(player_params)
     end
 
     # PATCH/PUT /api/players/1
     def update
-      # implement your code here
+      if @player.update(player_params)
+        render json: @player
+      else
+        render json: @player.errors, status: :unprocessable_entity
+      end
     end
 
     # DELETE /api/players/1
     def destroy
-      # implement your code here
+      @player = Player.find(params[:id])
+      @player.destroy
     end
 
     private
