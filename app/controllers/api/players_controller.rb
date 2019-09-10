@@ -4,8 +4,7 @@ module API
 
     # GET /api/players
     def index
-      player = Player.all
-      render json: player, status: :ok
+      render json: Player.all
     end
 
     # GET /api/players/1
@@ -37,8 +36,11 @@ module API
     # DELETE /api/players/1
     def destroy
       player = Player.find(params[:id])
-      player.destroy
-      render json: {status: "success"}
+      if player.invalid?
+        render json: player.destroy
+      else
+        render json: player.destroy
+      end
     end
 
     private
