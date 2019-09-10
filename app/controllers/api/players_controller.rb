@@ -9,17 +9,21 @@ module API
 
     # GET /api/players/1
     def show
-      player = Player.find(params[:id])
-      render json: player
+      player = set_player
+      if player 
+        render json: player, status: 200
+      else 
+        render json: player, status: 422
+      end
     end
 
     # POST /api/players
     def create
-      player = Player.new(player_params)
-      if player.save
+      player = Player.create(player_params)
+      if player.valid?
         render json: player, status: 201, location: [:api, player]
       else
-        render json: { errors: player.errors }, status: 422
+        render json: player.errors , status: 422
       end
     end
 
@@ -35,11 +39,11 @@ module API
 
     # DELETE /api/players/1
     def destroy
-      player = Player.find(params[:id])
-      if player.invalid?
-        render json: player.destroy
-      else
-        render json: player.destroy
+      player = set_player
+      if player
+        render json: player.destroy, status: 200
+      else 
+        render json: player, status: 422
       end
     end
 
