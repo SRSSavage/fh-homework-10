@@ -1,4 +1,5 @@
 class Player < ApplicationRecord
+  has_secure_password
   validates :first_name, presence: true, length: { minimum: 1 }
   validates :last_name, presence: true, length: { minimum: 1 }
   validates :email, presence: true, email: true

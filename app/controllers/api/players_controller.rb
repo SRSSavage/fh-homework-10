@@ -4,14 +4,14 @@ module API
 
     # GET /api/players
     def index
-      render json: Player.all
+      render json: Player.all, each_serializer: PlayerSerializer
     end
 
     # GET /api/players/1
     def show
       player = set_player
       if player 
-        render json: player, status: 200
+        render json: player, status: 200, each_serializer: PlayerSerializer
       else 
         render json: player, status: 422
       end
@@ -56,7 +56,7 @@ module API
 
     # Only allow a trusted parameter "white list" through.
     def player_params
-      params.require(:player).permit(:first_name, :last_name, :email, :age, :position)
+      params.require(:player).permit(:first_name, :last_name, :email, :age)
     end
   end
 end

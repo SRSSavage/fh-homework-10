@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: fh-homework-10_production
-  username: fh-homework-10
-  password: <%= ENV['FH-HOMEWORK-10_DATABASE_PASSWORD'] %>
+  #username: fh-homework-10
+  #password: <%= ENV['FH-HOMEWORK-10_DATABASE_PASSWORD'] %>
