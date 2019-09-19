@@ -9,7 +9,8 @@ module API
                        last_name: 'Doe', 
                        email: 'john.doe@example.com', 
                        age: 25, 
-                       position: 'goalkeeper')
+                       position: 'goalkeeper',
+                       password_digest: 'blaah')
 
         # act
         get api_players_url,
@@ -28,7 +29,8 @@ module API
                                   last_name: 'Doe',
                                   email: 'john.doe@example.com',
                                   age: 25,
-                                  position: 'goalkeeper')
+                                  position: 'goalkeeper',
+                                  password_digest: 'blah')
 
           # act
           get api_player_url(player),
@@ -62,7 +64,8 @@ module API
                               last_name: 'Doe',
                               email: 'john.doe@example.com',
                               age: 25,
-                              position: 'goalkeeper')
+                              position: 'goalkeeper',
+                              password_digest: 'blah')
 
           # act / assert
           expect {
@@ -102,7 +105,8 @@ module API
                                   last_name: 'Doe',
                                   email: 'john.doe@example.com',
                                   age: 25,
-                                  position: 'goalkeeper')
+                                  position: 'goalkeeper',
+                                  password_digest: 'blah')
           new_attributes = { first_name: 'Jane', last_name: 'Doe', email: 'jane.doe@example.com', age: 24 }
 
           # act
@@ -122,7 +126,8 @@ module API
                                   last_name: 'Doe',
                                   email: 'john.doe@example.com',
                                   age: 25,
-                                  position: 'goalkeeper')
+                                  position: 'goalkeeper',
+                                  password_digest: 'blah')
           invalid_attributes = { first_name: '', last_name: '', email: '', age: 0, position: '' }
 
           # act
@@ -144,7 +149,8 @@ module API
                                   last_name: 'Doe',
                                   email: 'john.doe@example.com',
                                   age: 25,
-                                  position: 'goalkeeper')
+                                  position: 'goalkeeper',
+                                  password_digest: 'blah')
 
           # act / assert
           expect {

@@ -24,6 +24,8 @@ positions = ['forward',
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
-    age: Faker::Number.between(15, 30)
+    age: Faker::Number.between(15, 30),
+    password_digest: Faker::Internet.password,
+    position: positions.sample
   }])
 end

@@ -1,5 +1,6 @@
 module API
   class PlayersController < ApplicationController
+ 
     before_action :set_player, only: [:show, :update, :destroy]
 
     # GET /api/players
@@ -11,7 +12,7 @@ module API
     def show
       player = set_player
       if player 
-        render json: player, status: 200, each_serializer: PlayerSerializer
+        render json: player, status: 200
       else 
         render json: player, status: 422
       end
@@ -56,7 +57,7 @@ module API
 
     # Only allow a trusted parameter "white list" through.
     def player_params
-      params.require(:player).permit(:first_name, :last_name, :email, :age)
+      params.require(:player).permit(:first_name, :last_name, :email, :age, :password_digest)
     end
   end
 end
