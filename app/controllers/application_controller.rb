@@ -1,2 +1,5 @@
-class ApplicationController < ActionController::API
+module Api
+  class ApplicationController < ActionController::API
+    include Knock::Authenticable
+  end
 end

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   post 'player_token' => 'player_token#create'
-  post 'user_token' => 'user_token#create'
+  devise_for :players
   namespace :api do
     resources :players
   end
