@@ -2,6 +2,7 @@ module API
   class PlayersController < ApplicationController
     before_action :set_player, only: [:show, :update, :destroy]
     before_action :authenticate_user
+    skip_before_action :verify_authenticity_token
     # GET /api/players
     def index
       render json: Player.all
@@ -21,7 +22,7 @@ module API
     def create
 
       player = Player.create(player_params)
-      if player.valid?
+      if player.save
         render json: player, status: 201, location: [:api, player]
       else
         render json: player.errors , status: 422
