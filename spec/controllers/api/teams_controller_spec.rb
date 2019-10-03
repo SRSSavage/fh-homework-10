@@ -102,7 +102,7 @@ module API
       context 'with invalid params' do
         it 'updates the requested team' do
           # arrange
-          team = Team.create!(name: '')
+          team = Team.create!(name: 'Tigers')
           invalid_attributes = { name: '' }
 
           # act
