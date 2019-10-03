@@ -13,6 +13,14 @@ module API
       end
     end
 
+    def create
+      team = Team.create(team_params)
+      if team.valid?
+        render json: team, status: 201, location: [:api, team]
+      else
+        render json: team.errors , status: 422
+      end
+    end
 
     private
 
