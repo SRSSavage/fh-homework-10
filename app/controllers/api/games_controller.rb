@@ -24,6 +24,14 @@ module API
       end
     end
 
+    def update
+      game = Game.find(params[:id])
+      if game.update_attributes(game_params)
+        render json: game
+      else
+        render json: game.errors, status: :unprocessable_entity
+      end
+    end
 
 
     private
