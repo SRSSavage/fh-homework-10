@@ -2,12 +2,12 @@ require 'rails_helper'
 
 module API
   describe GamesController, type: :request do
-    describe 'GET /games' do
+    describe 'GET /game' do
       it 'retrieves all the requested game' do
         # arrange
-        Game.create!(name: 'half field',
-                     home_team_id: 1,
-                     away_team_id: 1)
+        Game.create(name: 'Mid field',
+                    away_team_id: 1,
+                    home_team_id: 1)
 
         # act
         get api_games_url,
@@ -22,12 +22,12 @@ module API
       context 'with valid params' do
         it 'retrieves the requested game' do
           # arrange
-          game = Game.create!(name: 'half field',
-                              home_team_id: 1,
-                              away_team_id: 1)
+          game = Game.create(name: 'Mid field',
+                            away_team_id: 1,
+                            home_team_id: 1)
 
           # act
-          get api_game_url(game),
+          get api_games_url(game),
               as: :json
 
           # assert
@@ -54,9 +54,9 @@ module API
       context 'with valid params' do
         it 'creates a new Game' do
           # arrange
-          game = Game.create!(name: 'half field',
-                              home_team_id: 1,
-                              away_team_id: 1)
+          game = Game.new(name: 'Mid field',
+                          home_team_id: 1,
+                          away_team_id: 1)
 
           # act / assert
           expect {
@@ -73,7 +73,7 @@ module API
       context 'with invalid params' do
         it 'creates a new game' do
           # arrange
-          invalid_attributes = { name: '', home_team_id: 0, away_team_id: 0}
+          invalid_attributes = { name: '', away_team_id: -1, home_team_id: -1 }
 
           # act / assert
           expect {
@@ -92,13 +92,15 @@ module API
       context 'with valid params' do
         it 'updates the requested game' do
           # arrange
-          game = Game.create!(name: 'half field',
-                              home_team_id: 1,
-                              away_team_id: 1)
-          new_attributes = { name: 'Jane', home_team_id: 1, away_team_id: 1 }
+          game = Game.create(name: 'Mid field',
+                            away_team_id: 1,
+                            home_team_id: 1)
+          new_attributes = { name: 'left field',
+                            away_team_id: 2,
+                            home_team_id: 3 }
 
           # act
-          put api_game_url(game),
+          put api_game_url(team),
               params: { game: new_attributes },
               as: :json
 
@@ -110,10 +112,12 @@ module API
       context 'with invalid params' do
         it 'updates the requested game' do
           # arrange
-          game = Game.create!(name: 'half field',
-                              home_team_id: 1,
-                              away_team_id: 1)
-          invalid_attributes = { name: '', home_team_id: nil , away_team_id: nil }
+          game = Game.create(name: 'mid-field',
+                            away_team_id: 1,
+                            home_team_id: 2)
+          invalid_attributes = { name: '',
+                                away_team_id: -1,
+                                home_team_id: -1 }
 
           # act
           patch api_game_url(game),
@@ -130,13 +134,13 @@ module API
       context 'with valid params' do
         it 'destroys the requested game' do
           # arrange
-          game = Game.create!(name: 'half field',
-                              home_team_id: 1,
-                              away_team_id: 1)
+          game = Game.create(name: 'Mid field',
+                            away_team_id: 1,
+                            home_team_id: 1)
 
           # act / assert
           expect {
-            delete api_game_url(game),
+            delete api_games_url(game),
                    as: :json
           }.to change(Game, :count).by(-1)
 
@@ -146,7 +150,7 @@ module API
       end
 
       context 'with invalid params' do
-        it 'destroys the requested player' do
+        it 'destroys the requested team' do
           # arrange
           game_id = -1
 
