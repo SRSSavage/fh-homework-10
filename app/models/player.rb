@@ -4,6 +4,8 @@ class Player < ApplicationRecord
   validates :email, presence: true, email: true
   validates :age, presence: true, inclusion: { in: 1..100 }
 
+  belongs_to :team, optional: true
+
   def self.positions
     [
       'forward',
