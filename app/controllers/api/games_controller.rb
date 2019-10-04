@@ -33,6 +33,14 @@ module API
       end
     end
 
+    def destroy
+      game = set_game
+      if game
+        render json: game.destroy, status: 200
+      else 
+        render json: game, status: 422
+      end
+    end
 
     private
 
