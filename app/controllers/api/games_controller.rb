@@ -4,6 +4,16 @@ module API
       render json: Game.all
     end
 
+    def show
+      game = set_game
+      if game
+        render json: game, status: 200
+      else
+        render json: game, status: 422
+      end
+    end
+
+
 
 
     private
