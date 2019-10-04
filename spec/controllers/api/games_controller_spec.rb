@@ -73,12 +73,12 @@ module API
       context 'with invalid params' do
         it 'creates a new game' do
           # arrange
-          invalid_attributes = { name: '', home_team_id: nil, away_team_id: nil}
+          invalid_attributes = { name: '', home_team_id: 0, away_team_id: 0}
 
           # act / assert
           expect {
             post api_games_url,
-                 params: { games: invalid_attributes },
+                 params: { game: invalid_attributes },
                  as: :json
           }.to change(Game, :count).by(0)
 
