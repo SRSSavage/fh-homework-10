@@ -54,7 +54,7 @@ module API
       context 'with valid params' do
         it 'creates a new Game' do
           # arrange
-          game = Game.new(name: 'Mid field')
+          game = Game.new(name: 'First game')
 
           # act / assert
           expect {
