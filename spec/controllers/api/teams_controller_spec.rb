@@ -5,7 +5,7 @@ module API
     describe 'GET /teams' do
       it 'retrieves all the requested team' do
         # arrange
-        Team.create!(name: 'Tigers')
+          team = FactoryBot.create(:team)
 
         # act
         get api_teams_url,

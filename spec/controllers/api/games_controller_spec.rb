@@ -54,7 +54,12 @@ module API
       context 'with valid params' do
         it 'creates a new Game' do
           # arrange
-          game = Game.new(name: 'First game')
+          team1 = Team.new(name: 'Tigers')
+                               
+
+          game = Game.new(name: 'Mid field',
+                          away_team_id: 1,
+                          home_team_id: 1)
 
           # act / assert
           expect {
@@ -121,7 +126,7 @@ module API
           patch api_game_url(game),
                 params: { game: invalid_attributes },
                 as: :json
-              
+
           # assert
           expect(response.status).to eq(422)
         end
@@ -138,7 +143,7 @@ module API
 
           # act / assert
           expect {
-            delete api_games_url,
+            delete api_game_url,
                    as: :json
           }.to change(Game, :count).by(-1)
 
