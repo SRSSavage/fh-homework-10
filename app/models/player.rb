@@ -1,4 +1,8 @@
 class Player < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
   validates :first_name, presence: true, length: { minimum: 1 }
   validates :last_name, presence: true, length: { minimum: 1 }
   validates :email, presence: true, email: true
@@ -7,7 +11,6 @@ class Player < ApplicationRecord
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
 
-  has_secure_password
   alias_method :authenticate, :valid_password?
 
   def self.from_token_payload(payload)

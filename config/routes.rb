@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  post 'player_token' => 'player_token#create'
   devise_for :players
-  namespace :api do
+  post 'player_token' => 'player_token#create'
+
+  namespace :api, path: '/', constraints: { subdomain: 'api' } do
     resources :players
   end
 

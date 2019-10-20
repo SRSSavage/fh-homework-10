@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
 positions = ['forward',
             'right back',
             'right midfielder',
@@ -25,7 +26,7 @@ positions = ['forward',
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
     age: Faker::Number.between(15, 30),
-    password_digest: Faker::Internet.password,
+    password: Faker::Internet.password,
     position: positions.sample
   }])
 end
