@@ -58,7 +58,7 @@ module API
 
     # Only allow a trusted parameter "white list" through.
     def player_params
-      params.require(:player).permit(:first_name, :last_name, :email, :age, :password_digest)
+      params.require(:player).permit(:first_name, :last_name, :email, :age, :password)
     end
   end
 end
