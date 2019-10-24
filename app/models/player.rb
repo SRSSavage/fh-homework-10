@@ -1,4 +1,6 @@
 class Player < ApplicationRecord
+  belongs_to :team, optional: true
+  
   validates :first_name, presence: true, length: { minimum: 1 }
   validates :last_name, presence: true, length: { minimum: 1 }
   validates :email, presence: true, email: true
