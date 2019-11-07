@@ -1,4 +1,5 @@
 class Player < ApplicationRecord
+  attr_accessor :full_name
   belongs_to :team, optional: true
 
   validates :first_name, presence: true, length: { minimum: 1 }
@@ -6,7 +7,9 @@ class Player < ApplicationRecord
   validates :email, presence: true, email: true
   validates :age, presence: true, inclusion: { in: 1..100 }
 
-  
+  def full_name
+    "#{first_name},#{last_name}"
+  end
 
   def self.positions
     [
