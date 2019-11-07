@@ -7,7 +7,7 @@ module API
         # arrange
         Game.create(name: 'Mid field',
                     away_team_id: 1,
-                    home_team_id: 1)
+                    home_team_id: 2)
 
         # act
         get api_games_url,
@@ -22,9 +22,13 @@ module API
       context 'with valid params' do
         it 'retrieves the requested game' do
           # arrange
+          team1 = Team.create!(name: 'Tigers')
+          team2 = Team.create!(name: 'Pirates')
+
+
           game = Game.create(name: 'Mid field',
-                            away_team_id: 1,
-                            home_team_id: 1)
+                            away_team_id: team1,
+                            home_team_id: team2)
 
           # act
           get api_games_url(game),
@@ -54,16 +58,16 @@ module API
       context 'with valid params' do
         it 'creates a new Game' do
           # arrange
-          team1 = Team.new(name: 'Tigers')
-                               
+          team1 = Team.create!(name: 'Tigers')
+          team2 = Team.create!(name: 'Pirates')
 
-          game = Game.new(name: 'Mid field',
-                          away_team_id: 1,
-                          home_team_id: 1)
+          game = Game.create!(name: 'Mid field',
+                          away_team_id: team1.id,
+                          home_team_id: team2.id)
 
           # act / assert
           expect {
-            post api_games_url(game),
+            post api_games_url,
                  params: { game: game.attributes },
                  as: :json
           }.to change(Game, :count).by(1)
@@ -95,15 +99,21 @@ module API
       context 'with valid params' do
         it 'updates the requested game' do
           # arrange
+          team1 = Team.create!(name: 'Tigers')
+          team2 = Team.create!(name: 'Pirates')
+          team3 = Team.create!(name: 'Falcons')
+          team4 = Team.create!(name: 'Panthers')
+
           game = Game.create(name: 'Mid field',
-                            away_team_id: 1,
-                            home_team_id: 1)
+                            away_team_id: team1.id,
+                            home_team_id: team2.id)
+
           new_attributes = { name: 'left field',
-                            away_team_id: 2,
-                            home_team_id: 3 }
+                            away_team_id: team3.id,
+                            home_team_id: team4.id }
 
           # act
-          put api_game_url(games),
+          put api_games_url(game),
               params: { game: new_attributes },
               as: :json
 
@@ -115,9 +125,13 @@ module API
       context 'with invalid params' do
         it 'updates the requested game' do
           # arrange
+          team1 = Team.create!(name: 'Tigers')
+          team2 = Team.create!(name: 'Pirates')
+          
           game = Game.create(name: 'mid-field',
-                            away_team_id: 1,
-                            home_team_id: 2)
+                            away_team_id: team1.id,
+                            home_team_id: team2.id)
+
           invalid_attributes = { name: '',
                                 away_team_id: -1,
                                 home_team_id: -1 }
@@ -137,13 +151,15 @@ module API
       context 'with valid params' do
         it 'destroys the requested game' do
           # arrange
+          team1 = Team.create!(name: 'Tigers')
+          team2 = Team.create!(name: 'Pirates')
           game = Game.create(name: 'Mid field',
-                            away_team_id: 1,
-                            home_team_id: 1)
+                            away_team_id: team1.id,
+                            home_team_id: team2.id)
 
           # act / assert
           expect {
-            delete api_game_url,
+            delete api_games_url(game),
                    as: :json
           }.to change(Game, :count).by(-1)
 
