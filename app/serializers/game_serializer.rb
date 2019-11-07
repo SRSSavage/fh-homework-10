@@ -1,3 +1,5 @@
 class GameSerializer < ActiveModel::Serializer
-  attributes :name, :away_team_id, :home_team_id
+  attributes :name, :away_team, :home_team
+  belongs_to :away_team 
+  belongs_to :home_team 
 end
